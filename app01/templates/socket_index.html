@@ -47,15 +47,10 @@
     }
 
     function sendMessage(){
-        // let tag = document.getElementById("txt");
-        // socket.send(tag.value);
-
-        let tag1 = document.createElement("div");
-        tag1.innerText = "[点击发送按钮]";
-
-        console.log("sendMessage");
+        console.log("sending message...");
         let tag = document.getElementById("txt");
         console.log(tag.value);
+        
         if (socket.readyState === WebSocket.OPEN) { // 检查WebSocket状态
             socket.send(tag.value);
             tag.value = ""; // 发送后清空输入框
