@@ -54,3 +54,7 @@ def celery_sms(request):
 
     return HttpResponse('ok') 
  
+def room(request, group_num):
+    return render(request, 'socket_index.html', {
+        "group_num": group_num
+        })

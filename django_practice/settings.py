@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',    # daphne 启动服务器, 异步处理
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -42,6 +43,8 @@ INSTALLED_APPS = [
     'rest_framework',  # djangorestframework
     'django_filters',  # django-filter
     'drf_yasg',  # swagger 自动生成api文档
+    'channels',  # channels 启动django-channels， 用于websocket的实现
+    # 'mycelery.apps.MyceleryConfig',  # celery配置, 配置celery
 ]
 
 MIDDLEWARE = [
@@ -73,6 +76,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "django_practice.wsgi.application"
+ASGI_APPLICATION = 'django_practice.asgi.application'
 
 
 # Database
@@ -149,3 +153,14 @@ REST_FRAMEWORK = {
 }
 # 如果可以实现模糊查询，则以下语句可省略
 FILTERS_DEFAULT_LOOKUP_EXPR = 'icontains'
+
+
+# 声明基于内存的 channel layers
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+        # "CONFIG": {
+        #     "hosts": ["redis://10.211.55.25:6379/1"]
+        # }
+    }
+}

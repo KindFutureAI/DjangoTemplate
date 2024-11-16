@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .message {
+            height: 300px;
+            border: 1px solid #ddd;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="message" id="message"></div>
+<div>
+    <label>
+        <input type="text" placeholder="请输入" id="txt">
+    </label>
+    <input type="button" value="发送" onclick="sendMessage()" id="send">
+
+    <input type="button" value="关闭链接" onclick="closeMessage()">
+</div>
+<script>
+    // 创建websocket对象，向后台发送请求
+    let socket = new WebSocket("ws://localhost:8000/room/{{ group_num }}/");
+
+    // 当客户端和服务端刚创建好连接(self.accept)之后，自动触发.
+    socket.onopen = function (event){
+        let tag = document.createElement("div");
+        tag.innerText = "[连接成功]";
+        document.getElementById("message").appendChild(tag);
+    }
+
+    // 回调函数，客户端接收服务端消息
+    socket.onmessage = function (event){
+        let tag = document.createElement("div");
+        tag.innerText = event.data;
+        document.getElementById("message").appendChild(tag);
+    }
+
+    // 当断开连接时，触发该函数
+    socket.onclose =function (event){
+        let tag = document.createElement("div");
+        tag.innerText = "[连接断开]";
+        document.getElementById("message").appendChild(tag);
+    }
+
+    function sendMessage(){
+        // let tag = document.getElementById("txt");
+        // socket.send(tag.value);
+
+        let tag1 = document.createElement("div");
+        tag1.innerText = "[点击发送按钮]";
+
+        console.log("sendMessage");
+        let tag = document.getElementById("txt");
+        console.log(tag.value);
+        if (socket.readyState === WebSocket.OPEN) { // 检查WebSocket状态
+            socket.send(tag.value);
+            tag.value = ""; // 发送后清空输入框
+        } else {
+            console.error("WebSocket is not open. Ready state: " + socket.readyState);
+        }
+    }
+
+    function closeMessage(){
+        socket.close();
+    }
+
+    function handleKeyPress(event){
+        if (event.keyCode === 13){
+            document.getElementById("send").click();
+            document.getElementById("txt").value = "";
+        }
+    }
+
+    document.onkeydown = handleKeyPress;
+
+</script>
+</body>
+</html>
