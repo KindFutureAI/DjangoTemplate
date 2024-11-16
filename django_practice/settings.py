@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "app01.apps.App01Config",
     # 安装的插件
-    'rest_framework',
-    'django_filters',
+    'rest_framework',  # djangorestframework
+    'django_filters',  # django-filter
     'drf_yasg',  # swagger 自动生成api文档
 ]
 
@@ -80,16 +80,16 @@ WSGI_APPLICATION = "django_practice.wsgi.application"
 
 DATABASES = {
     "default": {
-        # "ENGINE": "django.db.backends.sqlite3",
-        # "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
 
         # choose mysql
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "django_practice",
-        "USER": "root",
-        "PASSWORD": "qp101517",
-        "HOST": "localhost",
-        "PORT": "3306",
+        # "ENGINE": "django.db.backends.mysql",
+        # "NAME": "django_practice",
+        # "USER": "root",
+        # "PASSWORD": "qp101517",
+        # "HOST": "localhost",
+        # "PORT": "3306",
     }
 }
 

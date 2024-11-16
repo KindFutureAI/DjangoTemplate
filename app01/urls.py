@@ -25,5 +25,5 @@ urlpatterns = [
     path("index/", views.index, name="index"),  # 一种方式
     path('', include(router.urls)),  # 第二种方式
     path('docs/', schema_view.with_ui('swagger',cache_timeout=0), name='schema-swagger-ui'),
-
+    path('celery_sms/', views.celery_sms, name='celery_sms')
 ]
