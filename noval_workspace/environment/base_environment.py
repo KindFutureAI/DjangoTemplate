@@ -30,3 +30,6 @@ class BaseEnvironment:
 
     def receive_message(self, agent_id):
         return self.communicator.receive_message(agent_id)
+    
+    def run(self):
+        raise NotImplementedError("Subclasses must implement the run method")
