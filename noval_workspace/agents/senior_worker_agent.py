@@ -1,9 +1,9 @@
-from .base_agent import BaseAgent
-from roles.senior_worker_role import SeniorWorkerRole
+from .worker_agent import WorkerAgent
+# from roles.senior_worker_role import SeniorWorkerRole
 
-class SeniorWorkerAgent(BaseAgent):
+class SeniorWorkerAgent(WorkerAgent):
     def __init__(self, name):
-        super().__init__(name, SeniorWorkerRole())
+        super().__init__(name, roles=[])
 
     def execute_task(self, task):
         # 高级职位员工负责特定业务小组的任务

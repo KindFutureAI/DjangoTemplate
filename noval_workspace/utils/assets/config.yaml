@@ -1,0 +1,11 @@
+agents:
+- name: agent_1
+  role: manager
+  tasks:
+  - content: I want to write a story about a robot who is trying to save the world.
+    task_id: task_1
+    task_type: idea_input
+  - content: I want to write a story about a robot who is trying to save the world.
+    task_id: task_2
+    task_type: plot_generation
+  - task_id: task_3
